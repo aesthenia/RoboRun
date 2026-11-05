@@ -4,6 +4,7 @@
 [ext_resource type="Theme" path="res://ui/theme.tres" id="2_sayjt"]
 [ext_resource type="Script" path="res://scripts/input/virtual_stick.gd" id="3_vs7rr"]
 [ext_resource type="Script" path="res://scripts/input/touch_button.gd" id="4_0l8t7"]
+[ext_resource type="Script" path="res://scripts/ui/safe_area.gd" id="9_safe"]
 
 [node name="TouchControls" type="CanvasLayer" unique_id=427838577]
 script = ExtResource("1_nk8ty")
@@ -16,7 +17,15 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource("2_sayjt")
 
-[node name="Stick" type="Control" parent="Root" unique_id=1940830592]
+[node name="SafeArea" type="Control" parent="Root" unique_id=731940003]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("9_safe")
+
+[node name="Stick" type="Control" parent="Root/SafeArea" unique_id=1940830592]
 anchors_preset = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -27,7 +36,7 @@ offset_bottom = -70.0
 mouse_filter = 2
 script = ExtResource("3_vs7rr")
 
-[node name="Jump" type="Control" parent="Root" unique_id=1298522327]
+[node name="Jump" type="Control" parent="Root/SafeArea" unique_id=1298522327]
 anchors_preset = 0
 anchor_left = 1.0
 anchor_top = 1.0
@@ -40,7 +49,7 @@ offset_bottom = -80.0
 mouse_filter = 2
 script = ExtResource("4_0l8t7")
 
-[node name="Fire" type="Control" parent="Root" unique_id=496860331]
+[node name="Fire" type="Control" parent="Root/SafeArea" unique_id=496860331]
 anchors_preset = 0
 anchor_left = 1.0
 anchor_top = 1.0
@@ -55,14 +64,14 @@ script = ExtResource("4_0l8t7")
 button = 2
 text = "FIRE"
 
-[node name="Pause" type="Control" parent="Root" unique_id=1949806276]
+[node name="Pause" type="Control" parent="Root/SafeArea" unique_id=1949806276]
 anchors_preset = 0
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -130.0
-offset_top = 30.0
+offset_left = -160.0
+offset_top = 40.0
 offset_right = -40.0
-offset_bottom = 120.0
+offset_bottom = 160.0
 mouse_filter = 2
 script = ExtResource("4_0l8t7")
 button = 6

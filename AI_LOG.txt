@@ -1,0 +1,23 @@
+AI_LOG — Assignment 8–9 (Mobile Game Kickoff), Robo Run
+Tool: Claude (Anthropic), 5 Nov 2026
+
+What I asked the AI:
+  To prepare the assignment from my existing midterm project (Godot, D:\gamedev\midterm).
+
+What the AI did:
+  - Wrote scripts/ui/safe_area.gd (SafeArea panel that reads the phone's safe area) and
+    scripts/autoload/device_sim.gd (F1–F3 device presets for testing in the editor, F9 screenshots).
+  - Edited main_menu.tscn, hud.tscn and touch_controls.tscn: moved buttons and text into SafeArea,
+    pause button 90 → 120 px, menu and pause buttons 460 × 120, text 36 px and larger, theme fonts 36/40.
+  - Changed the stretch aspect from "expand" to "keep_height" (like Unity's Match = 1).
+  - Drafted the GDD text, README.md, .gitignore and the Git steps.
+
+What I did myself:
+  - The midterm game itself (levels, player, enemies, boss, HUD, touch controls).
+  - Checked the GDD and changed it where it was not true for my game: ______
+  - Tested the screens with F1/F2/F3 in Godot, took the screenshots, made the commits and the pull request,
+	recorded the video.
+
+What I checked / understood:
+  - How SafeArea converts the safe-area rectangle into offsets (_apply / _inset_fractions).
+  - Why keep_height keeps the 1080 px height and widens the canvas on 19.5:9.

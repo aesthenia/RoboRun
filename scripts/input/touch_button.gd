@@ -63,7 +63,7 @@ func _draw() -> void:
 	draw_circle(c, r, Color(0.88, 0.89, 0.92, 0.85) if down else Color(0.09, 0.1, 0.12, 0.5))
 	draw_arc(c, r, 0, TAU, 64, Color(1, 1, 1, 0.4), 3, true)
 	var font := get_theme_default_font()
-	var fs := 26
+	var fs := 36
 	var w := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
 	draw_string(font, c + Vector2(-w / 2, fs * 0.35), text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs,
 			Color(0.09, 0.1, 0.12) if down else Color(1, 1, 1, 0.9))

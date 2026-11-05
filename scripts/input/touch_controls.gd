@@ -4,4 +4,4 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	$Root/Fire.visible = show_fire
+	$Root/SafeArea/Fire.visible = show_fire
