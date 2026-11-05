@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_marny"]
+albedo_color = Color(0.78, 0.56, 0.3, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_gfj5l"]
+material = SubResource("StandardMaterial3D_marny")
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ll65p"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="Animation" id="Animation_fja67"]
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platform:position:x")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 8.0, 8.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cr5dy"]
+_data = {
+&"move": SubResource("Animation_fja67")
+}
+
+[node name="MovingPlatform" type="Node3D" unique_id=2126602969]
+
+[node name="Platform" type="AnimatableBody3D" parent="." unique_id=1803439073]
+
+[node name="Mesh" type="MeshInstance3D" parent="Platform" unique_id=1803253734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("BoxMesh_gfj5l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform" unique_id=1197001277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_ll65p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1532537054]
+libraries/ = SubResource("AnimationLibrary_cr5dy")
+autoplay = &"move"

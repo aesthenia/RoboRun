@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/patrol_bomb.gd" id="1_gtk2r"]
+[ext_resource type="PackedScene" path="res://assets/models/comical_bomb.glb" id="2_ricql"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t5a6s"]
+
+[sub_resource type="Animation" id="Animation_4aapm"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.25, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.1, 0.9, 1.1), Vector3(0.95, 1.08, 0.95), Vector3(1.1, 0.9, 1.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_53k5w"]
+_data = {
+&"walk": SubResource("Animation_4aapm")
+}
+
+[node name="PatrolBomb" type="AnimatableBody3D" unique_id=1070703356]
+script = ExtResource("1_gtk2r")
+
+[node name="Model" type="Node3D" parent="." unique_id=41921734]
+
+[node name="Mesh" parent="Model" unique_id=1561084427 instance=ExtResource("2_ricql")]
+transform = Transform3D(0.29744974, 0, 0, 0, 0.29744974, 0, 0, 0, 0.29744974, 0.06042281, 0.18205404, -0.010290206)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=376678829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_t5a6s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=747197815]
+libraries/ = SubResource("AnimationLibrary_53k5w")
+autoplay = &"walk"

@@ -1,0 +1,59 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/heart_pickup.gd" id="1_jjgtk"]
+[ext_resource type="PackedScene" path="res://assets/models/heart_in_love.glb" id="2_jg2hp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7cova"]
+radius = 0.6
+
+[sub_resource type="Animation" id="Animation_p662y"]
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:position:y")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.8, 1.0, 0.8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ibtxi"]
+_data = {
+&"spin": SubResource("Animation_p662y")
+}
+
+[node name="HeartPickup" type="Area3D" unique_id=1238796550]
+script = ExtResource("1_jjgtk")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=179259679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="Model" type="Node3D" parent="Pivot" unique_id=1969407263]
+
+[node name="Mesh" parent="Pivot/Model" unique_id=168351770 instance=ExtResource("2_jg2hp")]
+transform = Transform3D(0.0044999993, 0, 0, 0, 0.0044999993, 0, 0, 0, 0.0044999993, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1116833718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("SphereShape3D_7cova")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=5687996]
+libraries/ = SubResource("AnimationLibrary_ibtxi")
+autoplay = &"spin"

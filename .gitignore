@@ -1,0 +1,22 @@
+# Godot 4 (this project uses Godot, so this replaces Unity's Library/ rule)
+.godot/
+.import/
+/android/
+export_credentials.cfg
+
+# Builds
+*.apk
+*.aab
+*.idsig
+*.exe
+*.pck
+/build/
+/export/
+
+# Local test screenshots (F9 in DeviceSim)
+/screenshots/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/

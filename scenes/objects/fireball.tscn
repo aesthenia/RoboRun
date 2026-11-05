@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/fireball.gd" id="1_j6vn0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yq7et"]
+albedo_color = Color(1, 0.5, 0.1, 1)
+roughness = 0.4
+emission_enabled = true
+emission = Color(1, 0.5, 0.1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_txalv"]
+material = SubResource("StandardMaterial3D_yq7et")
+radius = 0.35
+height = 0.7
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rrup3"]
+radius = 0.38
+
+[node name="Fireball" type="Area3D" unique_id=721776077]
+script = ExtResource("1_j6vn0")
+speed = 9.0
+lifetime = 4.0
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=405438055]
+mesh = SubResource("SphereMesh_txalv")
+
+[node name="Light" type="OmniLight3D" parent="." unique_id=1841208396]
+light_color = Color(1, 0.6, 0.2, 1)
+omni_range = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=833400393]
+shape = SubResource("SphereShape3D_rrup3")

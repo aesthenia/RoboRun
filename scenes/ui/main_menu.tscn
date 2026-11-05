@@ -1,0 +1,163 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_m1kxf"]
+[ext_resource type="PackedScene" path="res://assets/models/robot.glb" id="2_x2yvf"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="3_uhagc"]
+[ext_resource type="Theme" path="res://ui/theme.tres" id="4_btxxm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wb0q5"]
+sky_top_color = Color(0.25, 0.48, 0.85, 1)
+sky_horizon_color = Color(0.72, 0.84, 0.95, 1)
+ground_bottom_color = Color(0.45, 0.62, 0.85, 1)
+ground_horizon_color = Color(0.72, 0.84, 0.95, 1)
+
+[sub_resource type="Sky" id="Sky_q85j6"]
+sky_material = SubResource("ProceduralSkyMaterial_wb0q5")
+
+[sub_resource type="Environment" id="Environment_8g5eo"]
+background_mode = 2
+sky = SubResource("Sky_q85j6")
+ambient_light_source = 3
+ambient_light_energy = 0.6
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.72, 0.84, 0.95, 1)
+fog_density = 0.006
+fog_sky_affect = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7suek"]
+albedo_color = Color(0.38, 0.7, 0.32, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otr3d"]
+albedo_color = Color(0.47, 0.33, 0.22, 1)
+
+[node name="MainMenu" type="Node3D" unique_id=1162808329]
+script = ExtResource("1_m1kxf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=870072643]
+environment = SubResource("Environment_8g5eo")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=2145136431]
+transform = Transform3D(0.81915206, -0.43938506, 0.36868784, 0, 0.64278764, 0.76604444, -0.57357645, -0.62750685, 0.5265408, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 60.0
+
+[node name="Island" type="Node3D" parent="." unique_id=849692087]
+
+[node name="Grass" type="CSGBox3D" parent="Island" unique_id=510501588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(9, 0.6, 7)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Island" unique_id=457302659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(7.38, 2.4, 5.74)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Island2" type="Node3D" parent="." unique_id=1015824177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -1.5, -8)
+
+[node name="Grass" type="CSGBox3D" parent="Island2" unique_id=573548511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(4, 0.6, 4)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Island2" unique_id=596615607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(3.28, 2.4, 3.28)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Island3" type="Node3D" parent="." unique_id=1693294712]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, -12)
+
+[node name="Grass" type="CSGBox3D" parent="Island3" unique_id=418486859]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(5, 0.6, 5)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Island3" unique_id=982224084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(4.1, 2.4, 4.1)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Robot" parent="." unique_id=1910087617 instance=ExtResource("2_x2yvf")]
+transform = Transform3D(0.31402218, 0, 0.11462704, 0, 0.33428922, 0, -0.11462704, 0, 0.31402218, -2.4, 0, 0.5)
+
+[node name="Coin0" parent="." unique_id=533883294 instance=ExtResource("3_uhagc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -1)
+
+[node name="Coin1" parent="." unique_id=2127994494 instance=ExtResource("3_uhagc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, -1.5)
+
+[node name="Coin2" parent="." unique_id=1472338874 instance=ExtResource("3_uhagc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, -2.5)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1156037295]
+transform = Transform3D(1, 0, 0, 0, 0.97589743, 0.21822962, 0, -0.21822962, 0.97589743, 0, 2.6, 7.5)
+current = true
+fov = 55.0
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=502575755]
+
+[node name="Root" type="Control" parent="UI" unique_id=985673085]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource("4_btxxm")
+
+[node name="Column" type="VBoxContainer" parent="UI/Root" unique_id=455924135]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -760.0
+offset_top = -260.0
+offset_right = -160.0
+offset_bottom = 260.0
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Title" type="Label" parent="UI/Root/Column" unique_id=1415877689]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_y = 3
+theme_override_colors/font_outline_color = Color(0.15, 0.25, 0.45, 1)
+theme_override_constants/outline_size = 10
+text = "ROBO RUN"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="UI/Root/Column" unique_id=1794252817]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(0.95, 0.97, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_y = 3
+text = "Собери монеты и победи Каменного короля"
+horizontal_alignment = 1
+
+[node name="Gap" type="Control" parent="UI/Root/Column" unique_id=1807691551]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="BtnPlay" type="Button" parent="UI/Root/Column" unique_id=428700702]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Играть"
+
+[node name="BtnQuit" type="Button" parent="UI/Root/Column" unique_id=2065655515]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Выйти"

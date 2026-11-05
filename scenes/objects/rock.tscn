@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/rock.gd" id="1_7c88i"]
+[ext_resource type="PackedScene" path="res://assets/models/a_rock.glb" id="2_6jkjv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xnkle"]
+
+[node name="Rock" type="RigidBody3D" unique_id=314190017]
+mass = 2.0
+script = ExtResource("1_7c88i")
+lifetime = 1.5
+
+[node name="Model" type="Node3D" parent="." unique_id=1150453807]
+
+[node name="Mesh" parent="Model" unique_id=1566313766 instance=ExtResource("2_6jkjv")]
+transform = Transform3D(0.0014679647, 0, 0, 0, 0.0014679647, 0, 0, 0, 0.0014679647, -0.053056747, -0.3374852, 0.11988153)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=849167097]
+shape = SubResource("SphereShape3D_xnkle")

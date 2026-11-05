@@ -1,0 +1,44 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/spike_trap.gd" id="1_w1yol"]
+[ext_resource type="PackedScene" path="res://assets/models/spike_trap_01.glb" id="2_sb7xr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f621m"]
+size = Vector3(1.5, 0.4, 1.5)
+
+[sub_resource type="Animation" id="Animation_tpyrl"]
+length = 2.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spikes:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.05, 1.95, 2.25, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.55, -0.55, 0.0, 0.0, -0.55, -0.55]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fu6yo"]
+_data = {
+&"pulse": SubResource("Animation_tpyrl")
+}
+
+[node name="SpikeTrap" type="Node3D" unique_id=1374006432]
+script = ExtResource("1_w1yol")
+
+[node name="Spikes" type="AnimatableBody3D" parent="." unique_id=894506906 groups=["spikes"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
+
+[node name="Model" parent="Spikes" unique_id=356009576 instance=ExtResource("2_sb7xr")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spikes" unique_id=2017757140]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_f621m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1123475016]
+libraries/ = SubResource("AnimationLibrary_fu6yo")

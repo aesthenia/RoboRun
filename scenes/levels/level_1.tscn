@@ -1,0 +1,180 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level.gd" id="1_dga24"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_qxy0u"]
+[ext_resource type="Script" path="res://scripts/player/camera_rig.gd" id="3_excbq"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="4_iav0o"]
+[ext_resource type="PackedScene" path="res://scenes/objects/spikes.tscn" id="5_dnkej"]
+[ext_resource type="PackedScene" path="res://scenes/objects/heart_pickup.tscn" id="6_mm8aj"]
+[ext_resource type="PackedScene" path="res://scenes/objects/portal.tscn" id="7_wtwp4"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="8_iwr0g"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="9_bahl2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_np2pn"]
+sky_top_color = Color(0.25, 0.48, 0.85, 1)
+sky_horizon_color = Color(0.72, 0.84, 0.95, 1)
+ground_bottom_color = Color(0.45, 0.62, 0.85, 1)
+ground_horizon_color = Color(0.72, 0.84, 0.95, 1)
+
+[sub_resource type="Sky" id="Sky_v6ha0"]
+sky_material = SubResource("ProceduralSkyMaterial_np2pn")
+
+[sub_resource type="Environment" id="Environment_gmpev"]
+background_mode = 2
+sky = SubResource("Sky_v6ha0")
+ambient_light_source = 3
+ambient_light_energy = 0.6
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.72, 0.84, 0.95, 1)
+fog_density = 0.006
+fog_sky_affect = 0.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mkypq"]
+radius = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7suek"]
+albedo_color = Color(0.38, 0.7, 0.32, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otr3d"]
+albedo_color = Color(0.47, 0.33, 0.22, 1)
+
+[node name="Level1" type="Node3D" unique_id=1481793041]
+script = ExtResource("1_dga24")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=512650352]
+environment = SubResource("Environment_gmpev")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=127266978]
+transform = Transform3D(0.81915206, -0.43938506, 0.36868784, 0, 0.64278764, 0.76604444, -0.57357645, -0.62750685, 0.5265408, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 60.0
+
+[node name="Player" parent="." unique_id=2125892737 node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_qxy0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2)
+camera_rig = NodePath("../CameraRig")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=621125283 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2)
+script = ExtResource("3_excbq")
+target = NodePath("../Player")
+
+[node name="Pitch" type="SpringArm3D" parent="CameraRig" unique_id=193146210]
+transform = Transform3D(1, 0, 0, 0, 0.9130889, 0.40776044, 0, -0.40776044, 0.9130889, 0, 0, 0)
+shape = SubResource("SphereShape3D_mkypq")
+spring_length = 7.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/Pitch" unique_id=673720485]
+current = true
+fov = 70.0
+
+[node name="Islands" type="Node3D" parent="." unique_id=2039525693]
+
+[node name="Start" type="Node3D" parent="Islands" unique_id=1094361408]
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Start" unique_id=1548120567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(8, 0.6, 8)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Start" unique_id=1057400393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(6.56, 2.4, 6.56)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Second" type="Node3D" parent="Islands" unique_id=2107816585]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Second" unique_id=2058268256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(6, 0.6, 6)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Second" unique_id=1238893925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(4.92, 2.4, 4.92)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="High" type="Node3D" parent="Islands" unique_id=807986695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -18)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/High" unique_id=1668773122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(5, 0.6, 5)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/High" unique_id=910926567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(4.1, 2.4, 4.1)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Fourth" type="Node3D" parent="Islands" unique_id=831569348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -26)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Fourth" unique_id=1125383837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(6, 0.6, 6)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Fourth" unique_id=1231297237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(4.92, 2.4, 4.92)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Finish" type="Node3D" parent="Islands" unique_id=2128074008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Finish" unique_id=192467992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(8, 0.6, 8)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Finish" unique_id=1995436249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(6.56, 2.4, 6.56)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Coins" type="Node3D" parent="." unique_id=1960991217]
+
+[node name="Coin0" parent="Coins" unique_id=533883294 instance=ExtResource("4_iav0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Coin1" parent="Coins" unique_id=1112010679 instance=ExtResource("4_iav0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -10)
+
+[node name="Coin2" parent="Coins" unique_id=296854069 instance=ExtResource("4_iav0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -18)
+
+[node name="Coin3" parent="Coins" unique_id=192726958 instance=ExtResource("4_iav0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -26)
+
+[node name="Coin4" parent="Coins" unique_id=1639776273 instance=ExtResource("4_iav0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -34)
+
+[node name="Hazards" type="Node3D" parent="." unique_id=975934409]
+
+[node name="Spikes1" parent="Hazards" unique_id=1239329598 instance=ExtResource("5_dnkej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, -10)
+
+[node name="Spikes2" parent="Hazards" unique_id=1580846802 instance=ExtResource("5_dnkej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, -11.5)
+
+[node name="Spikes3" parent="Hazards" unique_id=2024700894 instance=ExtResource("5_dnkej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -26.5)
+
+[node name="Heart" parent="." unique_id=1238796550 instance=ExtResource("6_mm8aj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -24)
+
+[node name="Portal" parent="." unique_id=1716842767 instance=ExtResource("7_wtwp4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -37)
+
+[node name="TouchControls" parent="." unique_id=427838577 instance=ExtResource("8_iwr0g")]
+
+[node name="HUD" parent="." unique_id=605199085 instance=ExtResource("9_bahl2")]

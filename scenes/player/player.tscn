@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_p47bc"]
+[ext_resource type="PackedScene" path="res://assets/models/robot.glb" id="2_75vfm"]
+[ext_resource type="Script" path="res://scripts/player/health.gd" id="3_0owmy"]
+[ext_resource type="Script" path="res://scripts/player/shooter.gd" id="4_qek5x"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bullet.tscn" id="5_5gtgg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h17s1"]
+friction = 0.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_je7p5"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fm80t"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gx1jg"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugbui"]
+animation = &"Running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcs02"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_myrg7"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kvlxm"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf5tr"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"airborne"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"airborne"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"landed"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3j4b4"]
+states/Idle/node = SubResource("AnimationNodeAnimation_fm80t")
+states/Idle/position = Vector2(250, 100)
+states/Jump/node = SubResource("AnimationNodeAnimation_gx1jg")
+states/Jump/position = Vector2(375, 260)
+states/Run/node = SubResource("AnimationNodeAnimation_ugbui")
+states/Run/position = Vector2(500, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_fcs02"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_myrg7"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_kvlxm"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_8ydkj")]
+
+[node name="Player" type="RigidBody3D" unique_id=2125892737 groups=["player"]]
+physics_material_override = SubResource("PhysicsMaterial_h17s1")
+gravity_scale = 1.6
+lock_rotation = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 8
+script = ExtResource("1_p47bc")
+jump_speed = 8.5
+
+[node name="Model" parent="." unique_id=1910087617 instance=ExtResource("2_75vfm")]
+transform = Transform3D(0.33428922, 0, 0, 0, 0.33428922, 0, 0, 0, 0.33428922, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1118322172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_je7p5")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=524830759]
+tree_root = SubResource("AnimationNodeStateMachine_3j4b4")
+anim_player = NodePath("../Model/AnimationPlayer")
+parameters/conditions/airborne = false
+parameters/conditions/idle = false
+parameters/conditions/landed = false
+parameters/conditions/moving = false
+
+[node name="Health" type="Node" parent="." unique_id=1746228851 node_paths=PackedStringArray("blink_target")]
+script = ExtResource("3_0owmy")
+blink_target = NodePath("../Model")
+
+[node name="Shooter" type="Node" parent="." unique_id=268184144]
+script = ExtResource("4_qek5x")
+bullet_scene = ExtResource("5_5gtgg")

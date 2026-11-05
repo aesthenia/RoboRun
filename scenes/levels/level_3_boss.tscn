@@ -1,0 +1,130 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/boss_level.gd" id="1_egdrk"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_btjsr"]
+[ext_resource type="Script" path="res://scripts/player/camera_rig.gd" id="3_a4ida"]
+[ext_resource type="PackedScene" path="res://scenes/objects/boss.tscn" id="4_btmrf"]
+[ext_resource type="PackedScene" path="res://scenes/objects/heart_pickup.tscn" id="5_nmwgx"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="6_6y7vt"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="7_cppgr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6r1sy"]
+sky_top_color = Color(0.25, 0.48, 0.85, 1)
+sky_horizon_color = Color(0.72, 0.84, 0.95, 1)
+ground_bottom_color = Color(0.45, 0.62, 0.85, 1)
+ground_horizon_color = Color(0.72, 0.84, 0.95, 1)
+
+[sub_resource type="Sky" id="Sky_oi3ek"]
+sky_material = SubResource("ProceduralSkyMaterial_6r1sy")
+
+[sub_resource type="Environment" id="Environment_qt244"]
+background_mode = 2
+sky = SubResource("Sky_oi3ek")
+ambient_light_source = 3
+ambient_light_energy = 0.6
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.72, 0.84, 0.95, 1)
+fog_density = 0.006
+fog_sky_affect = 0.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8dy6v"]
+radius = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7suek"]
+albedo_color = Color(0.38, 0.7, 0.32, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otr3d"]
+albedo_color = Color(0.47, 0.33, 0.22, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lj5j3"]
+albedo_color = Color(0.52, 0.52, 0.58, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mq3ie"]
+height = 4.0
+radius = 9.5
+
+[node name="Level3" type="Node3D" unique_id=643777077]
+script = ExtResource("1_egdrk")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=570351396]
+environment = SubResource("Environment_qt244")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1993177849]
+transform = Transform3D(0.81915206, -0.43938506, 0.36868784, 0, 0.64278764, 0.76604444, -0.57357645, -0.62750685, 0.5265408, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 60.0
+
+[node name="Player" parent="." unique_id=2125892737 node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_btjsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 18)
+camera_rig = NodePath("../CameraRig")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=1320253628 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 18)
+script = ExtResource("3_a4ida")
+target = NodePath("../Player")
+
+[node name="Pitch" type="SpringArm3D" parent="CameraRig" unique_id=1345078308]
+transform = Transform3D(1, 0, 0, 0, 0.9130889, 0.40776044, 0, -0.40776044, 0.9130889, 0, 0, 0)
+shape = SubResource("SphereShape3D_8dy6v")
+spring_length = 7.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/Pitch" unique_id=34069812]
+current = true
+fov = 70.0
+
+[node name="Islands" type="Node3D" parent="." unique_id=1904323686]
+
+[node name="Start" type="Node3D" parent="Islands" unique_id=1583982354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Start" unique_id=763008603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(6, 0.6, 6)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Start" unique_id=1174424034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(4.92, 2.4, 4.92)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Arena" type="Node3D" parent="Islands" unique_id=2091803241]
+
+[node name="Top" type="CSGCylinder3D" parent="Islands/Arena" unique_id=730785080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+radius = 11.0
+height = 0.6
+sides = 32
+material = SubResource("StandardMaterial3D_lj5j3")
+
+[node name="Bottom" type="CSGCylinder3D" parent="Islands/Arena" unique_id=1497534874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+radius = 9.35
+height = 3.0
+sides = 24
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="ArenaTrigger" type="Area3D" parent="." unique_id=2081298911]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArenaTrigger" unique_id=510898401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_mq3ie")
+
+[node name="Boss" parent="." unique_id=1472307626 node_paths=PackedStringArray("target") instance=ExtResource("4_btmrf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.5)
+target = NodePath("../Player")
+
+[node name="Heart1" parent="." unique_id=1238796550 instance=ExtResource("5_nmwgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 2)
+
+[node name="Heart2" parent="." unique_id=1438412507 instance=ExtResource("5_nmwgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+
+[node name="TouchControls" parent="." unique_id=427838577 instance=ExtResource("6_6y7vt")]
+
+[node name="HUD" parent="." unique_id=605199085 instance=ExtResource("7_cppgr")]

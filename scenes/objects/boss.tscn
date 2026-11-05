@@ -1,0 +1,98 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/boss.gd" id="1_4nwq5"]
+[ext_resource type="PackedScene" path="res://scenes/objects/fireball.tscn" id="2_w5ldv"]
+[ext_resource type="PackedScene" path="res://scenes/objects/rock.tscn" id="3_3pknu"]
+[ext_resource type="PackedScene" path="res://scenes/objects/warning.tscn" id="4_ce5ts"]
+[ext_resource type="PackedScene" path="res://assets/models/a_rock.glb" id="5_hbtw5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5nd4a"]
+albedo_color = Color(1, 0.35, 0.1, 1)
+roughness = 0.3
+emission_enabled = true
+emission = Color(1, 0.35, 0.1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_o7fe0"]
+material = SubResource("StandardMaterial3D_5nd4a")
+radius = 0.22
+height = 0.44
+
+[sub_resource type="SphereMesh" id="SphereMesh_7v2mu"]
+material = SubResource("StandardMaterial3D_5nd4a")
+radius = 0.22
+height = 0.44
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ehglh"]
+radius = 1.4
+height = 4.0
+
+[sub_resource type="Animation" id="Animation_uy2kg"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.25, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:rotation:z")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.04, 0.04, -0.04]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jpqed"]
+_data = {
+&"idle": SubResource("Animation_uy2kg")
+}
+
+[node name="Boss" type="AnimatableBody3D" unique_id=1472307626]
+script = ExtResource("1_4nwq5")
+fireball_scene = ExtResource("2_w5ldv")
+rock_scene = ExtResource("3_3pknu")
+warning_scene = ExtResource("4_ce5ts")
+max_hp = 12
+
+[node name="Model" type="Node3D" parent="." unique_id=841033910]
+
+[node name="Mesh" parent="Model" unique_id=1566313766 instance=ExtResource("5_hbtw5")]
+transform = Transform3D(0.0056049563, 0, 0, 0, 0.0056049563, 0, 0, 0, 0.0056049563, -0.2025803, 0.81142014, 0.4577295)
+
+[node name="EyeL" type="MeshInstance3D" parent="Model" unique_id=500922413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 2.6, 1.05)
+mesh = SubResource("SphereMesh_o7fe0")
+
+[node name="EyeR" type="MeshInstance3D" parent="Model" unique_id=1773251369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 2.6, 1.05)
+mesh = SubResource("SphereMesh_7v2mu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=834390669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CapsuleShape3D_ehglh")
+
+[node name="Alert" type="Label3D" parent="." unique_id=592368452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+visible = false
+billboard = 1
+modulate = Color(1, 0.2, 0.15, 1)
+text = "!"
+font_size = 220
+outline_size = 30
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=18369664]
+libraries/ = SubResource("AnimationLibrary_jpqed")
+autoplay = &"idle"

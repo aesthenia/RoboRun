@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/portal.gd" id="1_l1is6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gd70c"]
+albedo_color = Color(0.85, 0.88, 0.95, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h5gno"]
+material = SubResource("StandardMaterial3D_gd70c")
+top_radius = 1.4
+bottom_radius = 1.5
+height = 0.12
+
+[sub_resource type="TorusMesh" id="TorusMesh_osqbb"]
+inner_radius = 1.0
+outer_radius = 1.2
+rings = 48
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ede74"]
+height = 2.5
+radius = 1.2
+
+[sub_resource type="Animation" id="Animation_cqigw"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ring:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4kos"]
+_data = {
+&"spin": SubResource("Animation_cqigw")
+}
+
+[node name="Portal" type="Area3D" unique_id=1716842767]
+script = ExtResource("1_l1is6")
+
+[node name="Pad" type="MeshInstance3D" parent="." unique_id=1691874767]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+mesh = SubResource("CylinderMesh_h5gno")
+
+[node name="Ring" type="MeshInstance3D" parent="." unique_id=1679500108]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.4, 0)
+mesh = SubResource("TorusMesh_osqbb")
+
+[node name="Label" type="Label3D" parent="." unique_id=1025726941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+billboard = 1
+text = "ВЫХОД"
+font_size = 64
+outline_size = 14
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=782696921]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("CylinderShape3D_ede74")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1582777861]
+libraries/ = SubResource("AnimationLibrary_j4kos")
+autoplay = &"spin"
