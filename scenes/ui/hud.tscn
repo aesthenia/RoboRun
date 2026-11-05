@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_bo48s"]
 [ext_resource type="Theme" path="res://ui/theme.tres" id="2_8qguk"]
 [ext_resource type="Script" path="res://scripts/ui/hearts.gd" id="3_136eg"]
+[ext_resource type="Script" path="res://scripts/ui/safe_area.gd" id="9_safe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oj5la"]
 bg_color = Color(0.1, 0.1, 0.12, 0.8)
@@ -30,7 +31,15 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource("2_8qguk")
 
-[node name="TopLeft" type="VBoxContainer" parent="Root" unique_id=1414288334]
+[node name="SafeArea" type="Control" parent="Root" unique_id=731940001]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("9_safe")
+
+[node name="TopLeft" type="VBoxContainer" parent="Root/SafeArea" unique_id=1414288334]
 layout_mode = 0
 offset_left = 36.0
 offset_top = 28.0
@@ -38,23 +47,23 @@ offset_right = 36.0
 offset_bottom = 28.0
 mouse_filter = 2
 
-[node name="Hearts" type="Control" parent="Root/TopLeft" unique_id=44862156]
+[node name="Hearts" type="Control" parent="Root/SafeArea/TopLeft" unique_id=44862156]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 56)
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("3_136eg")
 
-[node name="CoinsLabel" type="Label" parent="Root/TopLeft" unique_id=159601650]
+[node name="CoinsLabel" type="Label" parent="Root/SafeArea/TopLeft" unique_id=159601650]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
 theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
 theme_override_constants/shadow_offset_y = 3
 text = "Монеты: 0 / 0"
 
-[node name="LevelLabel" type="Label" parent="Root" unique_id=1069097892]
+[node name="LevelLabel" type="Label" parent="Root/SafeArea" unique_id=1069097892]
 unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 0.5
@@ -62,13 +71,13 @@ anchor_right = 0.5
 offset_left = -400.0
 offset_top = 24.0
 offset_right = 400.0
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 36
 theme_override_colors/font_color = Color(0.95, 0.96, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
 theme_override_constants/shadow_offset_y = 3
 horizontal_alignment = 1
 
-[node name="MessageLabel" type="Label" parent="Root" unique_id=475260832]
+[node name="MessageLabel" type="Label" parent="Root/SafeArea" unique_id=475260832]
 unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 0.5
@@ -82,26 +91,26 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
 theme_override_constants/shadow_offset_y = 3
 horizontal_alignment = 1
 
-[node name="BossBox" type="VBoxContainer" parent="Root" unique_id=1930096712]
+[node name="BossBox" type="VBoxContainer" parent="Root/SafeArea" unique_id=1930096712]
 unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -360.0
-offset_top = 70.0
+offset_top = 80.0
 offset_right = 360.0
 mouse_filter = 2
 
-[node name="BossName" type="Label" parent="Root/BossBox" unique_id=1711164489]
+[node name="BossName" type="Label" parent="Root/SafeArea/BossBox" unique_id=1711164489]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 36
 theme_override_colors/font_color = Color(1, 0.75, 0.6, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
 theme_override_constants/shadow_offset_y = 3
 text = "Каменный король"
 horizontal_alignment = 1
 
-[node name="BossBar" type="ProgressBar" parent="Root/BossBox" unique_id=435780386]
+[node name="BossBar" type="ProgressBar" parent="Root/SafeArea/BossBox" unique_id=435780386]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(720, 26)
 layout_mode = 2
@@ -121,41 +130,49 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 0.55)
 
-[node name="Center" type="CenterContainer" parent="Root/PauseMenu" unique_id=2032668692]
+[node name="SafeArea" type="Control" parent="Root/PauseMenu" unique_id=731940002]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("9_safe")
+
+[node name="Center" type="CenterContainer" parent="Root/PauseMenu/SafeArea" unique_id=2032668692]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Card" type="PanelContainer" parent="Root/PauseMenu/Center" unique_id=1340251220]
+[node name="Card" type="PanelContainer" parent="Root/PauseMenu/SafeArea/Center" unique_id=1340251220]
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="Root/PauseMenu/Center/Card" unique_id=1059978057]
+[node name="VBox" type="VBoxContainer" parent="Root/PauseMenu/SafeArea/Center/Card" unique_id=1059978057]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="Root/PauseMenu/Center/Card/VBox" unique_id=1501174436]
+[node name="Title" type="Label" parent="Root/PauseMenu/SafeArea/Center/Card/VBox" unique_id=1501174436]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 56
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
 theme_override_constants/shadow_offset_y = 3
 text = "Пауза"
 horizontal_alignment = 1
 
-[node name="BtnResume" type="Button" parent="Root/PauseMenu/Center/Card/VBox" unique_id=1475864628]
+[node name="BtnResume" type="Button" parent="Root/PauseMenu/SafeArea/Center/Card/VBox" unique_id=1475864628]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(460, 120)
 layout_mode = 2
 text = "Продолжить"
 
-[node name="BtnRestart" type="Button" parent="Root/PauseMenu/Center/Card/VBox" unique_id=1918066312]
+[node name="BtnRestart" type="Button" parent="Root/PauseMenu/SafeArea/Center/Card/VBox" unique_id=1918066312]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(460, 120)
 layout_mode = 2
 text = "Заново"
 
-[node name="BtnMenu" type="Button" parent="Root/PauseMenu/Center/Card/VBox" unique_id=1317410925]
+[node name="BtnMenu" type="Button" parent="Root/PauseMenu/SafeArea/Center/Card/VBox" unique_id=1317410925]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(460, 120)
 layout_mode = 2
 text = "Главное меню"

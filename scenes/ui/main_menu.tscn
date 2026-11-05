@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/robot.glb" id="2_x2yvf"]
 [ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="3_uhagc"]
 [ext_resource type="Theme" path="res://ui/theme.tres" id="4_btxxm"]
+[ext_resource type="Script" path="res://scripts/ui/safe_area.gd" id="9_safe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wb0q5"]
 sky_top_color = Color(0.25, 0.48, 0.85, 1)
@@ -111,20 +112,28 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource("4_btxxm")
 
-[node name="Column" type="VBoxContainer" parent="UI/Root" unique_id=455924135]
+[node name="SafeArea" type="Control" parent="UI/Root" unique_id=731940004]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("9_safe")
+
+[node name="Column" type="VBoxContainer" parent="UI/Root/SafeArea" unique_id=455924135]
 layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -760.0
-offset_top = -260.0
-offset_right = -160.0
-offset_bottom = 260.0
+offset_left = -820.0
+offset_top = -320.0
+offset_right = -120.0
+offset_bottom = 320.0
 theme_override_constants/separation = 14
 alignment = 1
 
-[node name="Title" type="Label" parent="UI/Root/Column" unique_id=1415877689]
+[node name="Title" type="Label" parent="UI/Root/SafeArea/Column" unique_id=1415877689]
 layout_mode = 2
 theme_override_font_sizes/font_size = 120
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -135,29 +144,30 @@ theme_override_constants/outline_size = 10
 text = "ROBO RUN"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="UI/Root/Column" unique_id=1794252817]
+[node name="Subtitle" type="Label" parent="UI/Root/SafeArea/Column" unique_id=1794252817]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 36
 theme_override_colors/font_color = Color(0.95, 0.97, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
 theme_override_constants/shadow_offset_y = 3
 text = "Собери монеты и победи Каменного короля"
 horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="Gap" type="Control" parent="UI/Root/Column" unique_id=1807691551]
+[node name="Gap" type="Control" parent="UI/Root/SafeArea/Column" unique_id=1807691551]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="BtnPlay" type="Button" parent="UI/Root/Column" unique_id=428700702]
+[node name="BtnPlay" type="Button" parent="UI/Root/SafeArea/Column" unique_id=428700702]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(460, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Играть"
 
-[node name="BtnQuit" type="Button" parent="UI/Root/Column" unique_id=2065655515]
+[node name="BtnQuit" type="Button" parent="UI/Root/SafeArea/Column" unique_id=2065655515]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(460, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Выйти"
