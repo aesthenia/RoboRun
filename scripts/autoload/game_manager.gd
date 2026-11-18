@@ -8,9 +8,10 @@ const WIN := "res://scenes/ui/win_screen.tscn"
 const LEVELS := [
 	"res://scenes/levels/level_1.tscn",
 	"res://scenes/levels/level_2.tscn",
+	"res://scenes/levels/level_3_outpost.tscn",
 	"res://scenes/levels/level_3_boss.tscn",
 ]
-const LEVEL_NAMES := ["Уровень 1 — Облачные острова", "Уровень 2 — Опасный путь", "Уровень 3 — Каменный король"]
+const LEVEL_NAMES := ["Уровень 1 — Облачные острова", "Уровень 2 — Опасный путь", "Уровень 3 — Застава стражей", "Уровень 4 — Каменный король"]
 
 var level_index := 0
 var coins := 0
