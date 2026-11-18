@@ -5,6 +5,7 @@ extends CanvasLayer
 ##   F2 = iPhone 13, 19.5:9 (2532x1170), notch on the left, yellow line = safe area
 ##   F3 = iPad, 4:3 (2048x1536)
 ##   F4 = simulator off
+##   F6 = show/hide enemy state labels
 ##   F9 = screenshot into the project folder screenshots/
 
 signal changed
@@ -43,6 +44,7 @@ func _input(event: InputEvent) -> void:
 		KEY_F2: use_device(1)
 		KEY_F3: use_device(2)
 		KEY_F4: use_device(-1)
+		KEY_F6: toggle_enemy_states()
 		KEY_F9: screenshot()
 		_: return
 	get_viewport().set_input_as_handled()
@@ -64,6 +66,13 @@ func use_device(i: int) -> void:
 		print("DeviceSim: ", DEVICES[i].name, " ", DEVICES[i].size)
 	changed.emit()
 	overlay.queue_redraw()
+
+
+func toggle_enemy_states() -> void:
+	SmartEnemy.show_states = not SmartEnemy.show_states
+	for e in get_tree().get_nodes_in_group("smart_enemy"):
+		if e.state_label:
+			e.state_label.visible = SmartEnemy.show_states
 
 
 func screenshot() -> void:
