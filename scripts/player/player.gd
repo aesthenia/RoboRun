@@ -67,7 +67,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("spikes"):
 		hurt(1, body.global_position)
-	elif body is Enemy:
+	elif body is Enemy and body.contact_damage > 0:
 		hurt(body.contact_damage, body.global_position)
 
 
