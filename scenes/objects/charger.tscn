@@ -1,0 +1,111 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/charger.gd" id="1_charger"]
+[ext_resource type="Script" path="res://scripts/enemies/vision.gd" id="2_vision"]
+[ext_resource type="PackedScene" path="res://assets/models/a_rock.glb" id="3_rock"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_eye"]
+albedo_color = Color(1, 0.2, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.2, 0.1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_horn"]
+albedo_color = Color(0.92, 0.88, 0.78, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="Mat_mark"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.15, 0.1, 0.6)
+
+[sub_resource type="SphereMesh" id="Mesh_eye"]
+material = SubResource("Mat_eye")
+radius = 0.09
+height = 0.18
+
+[sub_resource type="CylinderMesh" id="Mesh_horn"]
+material = SubResource("Mat_horn")
+top_radius = 0.0
+bottom_radius = 0.09
+height = 0.45
+
+[sub_resource type="BoxMesh" id="Mesh_mark"]
+material = SubResource("Mat_mark")
+size = Vector3(1.2, 0.04, 1)
+
+[sub_resource type="CapsuleShape3D" id="Shape_body"]
+radius = 0.6
+height = 1.4
+
+[node name="Charger" type="AnimatableBody3D"]
+sync_to_physics = false
+script = ExtResource("1_charger")
+walk_speed = 2.5
+turn_speed = 6.0
+max_hp = 4
+contact_damage = 0
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Body" type="Node3D" parent="Model"]
+
+[node name="Rock" parent="Model/Body" instance=ExtResource("3_rock")]
+transform = Transform3D(0.0019, 0, 0, 0, 0.0019, 0, 0, 0, 0.0019, -0.069, 0.275, 0.155)
+
+[node name="EyeL" type="MeshInstance3D" parent="Model/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.95, 0.6)
+mesh = SubResource("Mesh_eye")
+
+[node name="EyeR" type="MeshInstance3D" parent="Model/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.95, 0.6)
+mesh = SubResource("Mesh_eye")
+
+[node name="HornL" type="MeshInstance3D" parent="Model/Body"]
+transform = Transform3D(0.866, 0.5, 0, -0.5, 0.866, 0, 0, 0, 1, -0.38, 1.25, 0.35)
+mesh = SubResource("Mesh_horn")
+
+[node name="HornR" type="MeshInstance3D" parent="Model/Body"]
+transform = Transform3D(0.866, -0.5, 0, 0.5, 0.866, 0, 0, 0, 1, 0.38, 1.25, 0.35)
+mesh = SubResource("Mesh_horn")
+
+[node name="DashMark" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 4.5)
+visible = false
+cast_shadow = 0
+mesh = SubResource("Mesh_mark")
+
+[node name="Vision" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0.6)
+script = ExtResource("2_vision")
+view_range = 10.0
+view_angle = 120.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("Shape_body")
+
+[node name="NavAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.4
+path_height_offset = 0.5
+target_desired_distance = 0.5
+height = 1.4
+radius = 0.6
+
+[node name="Alert" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+modulate = Color(1, 0.2, 0.15, 1)
+text = "!"
+font_size = 120
+outline_size = 24
+
+[node name="StateLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
+billboard = 1
+no_depth_test = true
+text = "IDLE"
+font_size = 40
+outline_size = 10
