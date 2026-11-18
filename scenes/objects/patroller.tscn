@@ -1,0 +1,88 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/patroller.gd" id="1_patrol"]
+[ext_resource type="PackedScene" path="res://assets/models/comical_bomb.glb" id="2_bomb"]
+[ext_resource type="Script" path="res://scripts/enemies/vision.gd" id="3_vision"]
+[ext_resource type="PackedScene" path="res://scenes/objects/warning.tscn" id="4_warn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_body"]
+
+[sub_resource type="Animation" id="Animation_walk"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/Mesh:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.18205404, 0.43, 0.18205404]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_patrol"]
+_data = {
+&"walk": SubResource("Animation_walk")
+}
+
+[node name="Patroller" type="AnimatableBody3D"]
+sync_to_physics = false
+script = ExtResource("1_patrol")
+blast_mark_scene = ExtResource("4_warn")
+walk_speed = 2.0
+max_hp = 2
+contact_damage = 0
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Mesh" parent="Model" instance=ExtResource("2_bomb")]
+transform = Transform3D(0.29744974, 0, 0, 0, 0.29744974, 0, 0, 0, 0.29744974, 0.06042281, 0.18205404, -0.010290206)
+
+[node name="FuseLight" type="OmniLight3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+visible = false
+light_color = Color(1, 0.15, 0.1, 1)
+light_energy = 6.0
+omni_range = 3.0
+
+[node name="Vision" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.3)
+script = ExtResource("3_vision")
+view_range = 8.0
+view_angle = 120.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_body")
+
+[node name="NavAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.4
+target_desired_distance = 0.5
+path_height_offset = 0.5
+height = 1.2
+radius = 0.5
+
+[node name="Alert" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+modulate = Color(1, 0.2, 0.15, 1)
+text = "!"
+font_size = 120
+outline_size = 24
+
+[node name="StateLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+billboard = 1
+no_depth_test = true
+text = "PATROL"
+font_size = 40
+outline_size = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries/ = SubResource("AnimationLibrary_patrol")
+autoplay = &"walk"
