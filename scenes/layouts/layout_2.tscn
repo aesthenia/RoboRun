@@ -1,0 +1,139 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="4_1yj8c"]
+[ext_resource type="PackedScene" path="res://scenes/objects/spike_trap.tscn" id="7_gw1l3"]
+[ext_resource type="PackedScene" path="res://scenes/objects/spikes.tscn" id="8_p4se4"]
+[ext_resource type="PackedScene" path="res://scenes/objects/portal.tscn" id="10_lkn2k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7suek"]
+albedo_color = Color(0.38, 0.7, 0.32, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otr3d"]
+albedo_color = Color(0.47, 0.33, 0.22, 1)
+
+[node name="Layout2" type="Node3D"]
+
+[node name="Islands" type="Node3D" parent="."]
+
+[node name="Start" type="Node3D" parent="Islands"]
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Start"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(7, 0.6, 7)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Start"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(5.74, 2.4, 5.74)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Patrol" type="Node3D" parent="Islands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Patrol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(6, 0.6, 5)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Patrol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(4.92, 2.4, 4.1)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Small" type="Node3D" parent="Islands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -17)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Small"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(3, 0.6, 3)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Small"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(2.46, 2.4, 2.46)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Landing" type="Node3D" parent="Islands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Landing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(6, 0.6, 6)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Landing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(4.92, 2.4, 4.92)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="High" type="Node3D" parent="Islands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -42)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/High"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(4, 0.6, 4)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/High"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(3.28, 2.4, 3.28)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Camp" type="Node3D" parent="Islands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -51)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Camp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(8, 0.6, 8)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Camp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(6.56, 2.4, 6.56)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="Finish" type="Node3D" parent="Islands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -61)
+
+[node name="Grass" type="CSGBox3D" parent="Islands/Finish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+use_collision = true
+size = Vector3(6, 0.6, 6)
+material = SubResource("StandardMaterial3D_7suek")
+
+[node name="Dirt" type="CSGBox3D" parent="Islands/Finish"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8, 0)
+size = Vector3(4.92, 2.4, 4.92)
+material = SubResource("StandardMaterial3D_otr3d")
+
+[node name="MovingPlatform" parent="." instance=ExtResource("4_1yj8c")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.8, -21)
+
+[node name="Hazards" type="Node3D" parent="."]
+
+[node name="SpikeTrap1" parent="Hazards" instance=ExtResource("7_gw1l3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35)
+
+[node name="SpikeTrap2" parent="Hazards" instance=ExtResource("7_gw1l3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -35)
+time_offset = 1.2
+
+[node name="SpikeTrap3" parent="Hazards" instance=ExtResource("7_gw1l3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -35)
+time_offset = 1.2
+
+[node name="Spikes1" parent="Hazards" instance=ExtResource("8_p4se4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -52)
+
+[node name="Spikes2" parent="Hazards" instance=ExtResource("8_p4se4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -50)
+
+[node name="Portal" parent="." instance=ExtResource("10_lkn2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -62.5)

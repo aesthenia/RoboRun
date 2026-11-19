@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Campaign" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/campaign.gd" id="1_campaign"]
+[ext_resource type="Script" path="res://scripts/data/level_data.gd" id="2_level"]
+[ext_resource type="Resource" path="res://data/levels/level_1.tres" id="3_l1"]
+[ext_resource type="Resource" path="res://data/levels/level_2.tres" id="4_l2"]
+[ext_resource type="Resource" path="res://data/levels/level_3.tres" id="5_l3"]
+[ext_resource type="Resource" path="res://data/levels/level_4.tres" id="6_l4"]
+
+[resource]
+script = ExtResource("1_campaign")
+levels = Array[ExtResource("2_level")]([ExtResource("3_l1"), ExtResource("4_l2"), ExtResource("5_l3"), ExtResource("6_l4")])

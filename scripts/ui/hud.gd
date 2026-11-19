@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var hearts = %Hearts
 @onready var coins_label: Label = %CoinsLabel
 @onready var level_label: Label = %LevelLabel
+@onready var time_label: Label = %TimeLabel
 @onready var message_label: Label = %MessageLabel
 @onready var boss_box: Control = %BossBox
 @onready var boss_bar: ProgressBar = %BossBar
@@ -36,6 +37,13 @@ func show_boss(boss: Node) -> void:
 	boss_bar.max_value = boss.max_hp
 	boss_bar.value = boss.max_hp
 	boss.hp_changed.connect(func(hp, _m): boss_bar.value = hp)
+
+
+func set_time(t: float) -> void:
+	time_label.visible = GameManager.current_level().time_limit > 0.0
+	var s := maxi(ceili(t), 0)
+	time_label.text = "%d:%02d" % [s / 60, s % 60]
+	time_label.modulate = Color(1, 0.35, 0.3) if s <= 10 else Color.WHITE
 
 
 func _on_coins(collected: int, total: int) -> void:

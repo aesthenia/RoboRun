@@ -1,0 +1,66 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level_loader.gd" id="1_loader"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_qxy0u"]
+[ext_resource type="Script" path="res://scripts/player/camera_rig.gd" id="3_excbq"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="8_iwr0g"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="9_bahl2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_np2pn"]
+sky_top_color = Color(0.25, 0.48, 0.85, 1)
+sky_horizon_color = Color(0.72, 0.84, 0.95, 1)
+ground_bottom_color = Color(0.45, 0.62, 0.85, 1)
+ground_horizon_color = Color(0.72, 0.84, 0.95, 1)
+
+[sub_resource type="Sky" id="Sky_v6ha0"]
+sky_material = SubResource("ProceduralSkyMaterial_np2pn")
+
+[sub_resource type="Environment" id="Environment_gmpev"]
+background_mode = 2
+sky = SubResource("Sky_v6ha0")
+ambient_light_source = 3
+ambient_light_energy = 0.6
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.72, 0.84, 0.95, 1)
+fog_density = 0.006
+fog_sky_affect = 0.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mkypq"]
+radius = 0.3
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_loader")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gmpev")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.81915206, -0.43938506, 0.36868784, 0, 0.64278764, 0.76604444, -0.57357645, -0.62750685, 0.5265408, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 60.0
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_qxy0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2)
+camera_rig = NodePath("../CameraRig")
+
+[node name="CameraRig" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2)
+script = ExtResource("3_excbq")
+target = NodePath("../Player")
+
+[node name="Pitch" type="SpringArm3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 0.9130889, 0.40776044, 0, -0.40776044, 0.9130889, 0, 0, 0)
+shape = SubResource("SphereShape3D_mkypq")
+spring_length = 7.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/Pitch"]
+current = true
+fov = 70.0
+
+[node name="TouchControls" parent="." instance=ExtResource("8_iwr0g")]
+
+[node name="HUD" parent="." instance=ExtResource("9_bahl2")]

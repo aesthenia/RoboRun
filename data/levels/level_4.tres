@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/level_data.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/data/enemy_spawn.gd" id="2_spawn"]
+[ext_resource type="PackedScene" path="res://scenes/layouts/layout_4.tscn" id="3_layout"]
+[ext_resource type="PackedScene" path="res://scenes/objects/boss.tscn" id="4_boss"]
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("2_spawn")
+scene = ExtResource("4_boss")
+position = Vector3(0, 0, -6.5)
+
+[resource]
+script = ExtResource("1_level")
+title = "Уровень 4 — Каменный король"
+layout = ExtResource("3_layout")
+goal = 1
+time_limit = 240.0
+time_bonus_per_second = 10
+player_start = Vector3(0, 0.2, 18)
+coins = Array[Vector3]([])
+hearts = Array[Vector3]([Vector3(-7, 0, 2), Vector3(7, 0, 2)])
+enemies = Array[ExtResource("2_spawn")]([SubResource("Spawn_1")])

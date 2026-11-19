@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/level_data.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/data/enemy_spawn.gd" id="2_spawn"]
+[ext_resource type="PackedScene" path="res://scenes/layouts/layout_2.tscn" id="3_layout"]
+[ext_resource type="PackedScene" path="res://scenes/objects/patrol_bomb.tscn" id="4_bomb"]
+[ext_resource type="Resource" path="res://data/enemies/patrol_bomb_fast.tres" id="5_patrol_bomb_fast"]
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("2_spawn")
+scene = ExtResource("4_bomb")
+position = Vector3(0, 0, -9)
+patrol_distance = 2.0
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("2_spawn")
+scene = ExtResource("4_bomb")
+position = Vector3(0, 0, -49.5)
+stats = ExtResource("5_patrol_bomb_fast")
+patrol_distance = 3.0
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("2_spawn")
+scene = ExtResource("4_bomb")
+position = Vector3(0, 0, -53)
+yaw_degrees = 90.0
+patrol_distance = 2.5
+
+[resource]
+script = ExtResource("1_level")
+title = "Уровень 2 — Опасный путь"
+layout = ExtResource("3_layout")
+goal = 0
+time_limit = 150.0
+time_bonus_per_second = 10
+player_start = Vector3(0, 0.2, 2)
+coins = Array[Vector3]([Vector3(-2, 0, -10), Vector3(0, 0.8, -17), Vector3(0, 0, -33), Vector3(0, 1.5, -42), Vector3(-3, 0, -49), Vector3(3, 0, -53), Vector3(1.5, 0, -61)])
+hearts = Array[Vector3]([Vector3(2, 0, -32.5)])
+enemies = Array[ExtResource("2_spawn")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])

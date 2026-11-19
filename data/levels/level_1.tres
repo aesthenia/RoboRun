@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/level_data.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/data/enemy_spawn.gd" id="2_spawn"]
+[ext_resource type="PackedScene" path="res://scenes/layouts/layout_1.tscn" id="3_layout"]
+
+[resource]
+script = ExtResource("1_level")
+title = "Уровень 1 — Облачные острова"
+layout = ExtResource("3_layout")
+goal = 0
+time_limit = 90.0
+time_bonus_per_second = 10
+player_start = Vector3(0, 0.2, 2)
+coins = Array[Vector3]([Vector3(0, 0, -2), Vector3(-1.5, 0, -10), Vector3(0, 1.2, -18), Vector3(2, 0, -26), Vector3(-2, 0, -34)])
+hearts = Array[Vector3]([Vector3(2.5, 0, -24)])
+enemies = Array[ExtResource("2_spawn")]([])
