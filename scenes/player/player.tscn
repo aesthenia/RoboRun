@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scripts/player/health.gd" id="3_0owmy"]
 [ext_resource type="Script" path="res://scripts/player/shooter.gd" id="4_qek5x"]
 [ext_resource type="PackedScene" path="res://scenes/objects/bullet.tscn" id="5_5gtgg"]
+[ext_resource type="Resource" path="res://data/player.tres" id="99_stats"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h17s1"]
 friction = 0.0
@@ -67,6 +68,7 @@ continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 8
 script = ExtResource("1_p47bc")
+stats = ExtResource("99_stats")
 jump_speed = 8.5
 
 [node name="Model" parent="." unique_id=1910087617 instance=ExtResource("2_75vfm")]

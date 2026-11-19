@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ChargerStats" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/charger_stats.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+max_hp = 4
+contact_damage = 0
+walk_speed = 2.5
+turn_speed = 6.0
+vision_range = 10.0
+view_angle = 120.0
+alert_time = 2.0
+rest_time = 0.8
+windup_time = 0.7
+windup_lock = 0.75
+dash_speed = 12.0
+dash_distance = 9.0
+dash_damage = 1
+edge_check_ahead = 1.0
+stun_time = 1.4
+stunned_damage_multiplier = 2

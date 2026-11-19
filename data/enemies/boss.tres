@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="BossStats" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/boss_stats.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+max_hp = 12
+contact_damage = 1
+walk_speed = 0.0
+turn_speed = 3.0
+vision_range = 0.0
+view_angle = 360.0
+alert_time = 0.0
+arena_radius = 10.0
+phase2_hp_fraction = 0.5
+pause_phase1 = 2.2
+pause_phase2 = 1.4
+roar_warning = 0.7
+fan_count_phase1 = 5
+fan_count_phase2 = 9
+fan_spread_phase1 = 50.0
+fan_spread_phase2 = 90.0
+fireball_speed = 9.0
+fireball_damage = 1
+rain_count_phase1 = 4
+rain_count_phase2 = 7
+rain_scatter = 4.0
+rain_warning = 1.1
+rock_drop_height = 9.0
+rock_damage = 1
+rock_lifetime = 1.5

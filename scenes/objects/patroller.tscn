@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/comical_bomb.glb" id="2_bomb"]
 [ext_resource type="Script" path="res://scripts/enemies/vision.gd" id="3_vision"]
 [ext_resource type="PackedScene" path="res://scenes/objects/warning.tscn" id="4_warn"]
+[ext_resource type="Resource" path="res://data/enemies/patroller.tres" id="99_stats"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_body"]
 
@@ -31,10 +32,8 @@ _data = {
 [node name="Patroller" type="AnimatableBody3D"]
 sync_to_physics = false
 script = ExtResource("1_patrol")
+stats = ExtResource("99_stats")
 blast_mark_scene = ExtResource("4_warn")
-walk_speed = 2.0
-max_hp = 2
-contact_damage = 0
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -51,8 +50,6 @@ omni_range = 3.0
 [node name="Vision" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.3)
 script = ExtResource("3_vision")
-view_range = 8.0
-view_angle = 120.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

@@ -5,6 +5,7 @@ extends Area3D
 @export var lifetime := 3.0
 
 var direction := Vector3.FORWARD
+var damage := 1
 
 
 func _ready() -> void:

@@ -1,6 +1,6 @@
 extends Projectile
 
-@export var max_range := 11.0
+var max_range := 11.0
 
 
 func _ready() -> void:
@@ -12,7 +12,7 @@ func on_hit(body: Node) -> bool:
 	if body.is_in_group("player"):
 		return false
 	if body is Enemy:
-		body.take_hit(1)
+		body.take_hit(damage)
 	elif body is Hazard:
 		body.on_shot()
 	return true

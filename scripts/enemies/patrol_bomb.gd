@@ -1,7 +1,6 @@
 extends Enemy
 
 @export var distance := 4.0
-@export var speed := 2.0
 
 var start := Vector3.ZERO
 var t := 0.0
@@ -15,7 +14,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	t += delta * speed / distance
+	t += delta * stats.walk_speed / distance
 	var k := pingpong(t, 2.0) - 1.0
 	var prev := position
 	position = start + transform.basis.x * k * distance

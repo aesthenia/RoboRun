@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PatrollerStats" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/patroller_stats.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+max_hp = 2
+contact_damage = 0
+walk_speed = 2.0
+turn_speed = 8.0
+vision_range = 8.0
+view_angle = 120.0
+alert_time = 2.0
+point_wait = 0.8
+chase_speed = 3.6
+lose_sight_time = 2.0
+leash_range = 12.0
+trigger_range = 1.8
+fuse_time = 0.6
+fuse_swell = 0.35
+blast_radius = 2.4
+blast_damage = 1
+recharge_time = 2.0

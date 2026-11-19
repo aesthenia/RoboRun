@@ -5,12 +5,6 @@ signal state_changed(state_name: String)
 
 static var show_states := OS.is_debug_build()
 
-@export_group("Movement")
-@export var walk_speed := 2.0
-@export var turn_speed := 8.0
-@export_group("Senses")
-@export var alert_time := 2.0
-
 var player: Node3D
 var home := Vector3.ZERO
 var home_yaw := 0.0
@@ -31,6 +25,8 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	home = global_position
 	home_yaw = model.global_rotation.y
+	vision.view_range = stats.vision_range
+	vision.view_angle = stats.view_angle
 
 
 func enter_state(state_name: String) -> void:
@@ -67,7 +63,7 @@ func yaw_to(point: Vector3) -> float:
 
 
 func turn_to_yaw(yaw: float, delta: float, speed := -1.0) -> void:
-	var s := turn_speed if speed < 0.0 else speed
+	var s := stats.turn_speed if speed < 0.0 else speed
 	var r := model.global_rotation
 	r.y = lerp_angle(r.y, yaw, clampf(s * delta, 0.0, 1.0))
 	model.global_rotation = r
@@ -115,5 +111,5 @@ func can_reach(point: Vector3) -> bool:
 
 
 func take_hit(dmg: int) -> void:
-	alerted_until = now() + alert_time
+	alerted_until = now() + stats.alert_time
 	super(dmg)

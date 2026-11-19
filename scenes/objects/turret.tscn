@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/turret.gd" id="1_turret"]
 [ext_resource type="Script" path="res://scripts/enemies/vision.gd" id="2_vision"]
 [ext_resource type="PackedScene" path="res://scenes/objects/fireball.tscn" id="3_fireball"]
+[ext_resource type="Resource" path="res://data/enemies/turret.tres" id="99_stats"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_stone"]
 albedo_color = Color(0.46, 0.43, 0.41, 1)
@@ -56,9 +57,8 @@ radius = 0.6
 [node name="Turret" type="AnimatableBody3D"]
 sync_to_physics = false
 script = ExtResource("1_turret")
+stats = ExtResource("99_stats")
 projectile_scene = ExtResource("3_fireball")
-max_hp = 3
-contact_damage = 0
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -89,8 +89,6 @@ mesh = SubResource("Mesh_laser")
 [node name="Vision" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0.5)
 script = ExtResource("2_vision")
-view_range = 12.0
-view_angle = 140.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)

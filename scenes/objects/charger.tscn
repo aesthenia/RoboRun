@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/charger.gd" id="1_charger"]
 [ext_resource type="Script" path="res://scripts/enemies/vision.gd" id="2_vision"]
 [ext_resource type="PackedScene" path="res://assets/models/a_rock.glb" id="3_rock"]
+[ext_resource type="Resource" path="res://data/enemies/charger.tres" id="99_stats"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_eye"]
 albedo_color = Color(1, 0.2, 0.1, 1)
@@ -41,10 +42,7 @@ height = 1.4
 [node name="Charger" type="AnimatableBody3D"]
 sync_to_physics = false
 script = ExtResource("1_charger")
-walk_speed = 2.5
-turn_speed = 6.0
-max_hp = 4
-contact_damage = 0
+stats = ExtResource("99_stats")
 
 [node name="Model" type="Node3D" parent="."]
 
@@ -78,8 +76,6 @@ mesh = SubResource("Mesh_mark")
 [node name="Vision" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0.6)
 script = ExtResource("2_vision")
-view_range = 10.0
-view_angle = 120.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

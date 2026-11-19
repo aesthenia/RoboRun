@@ -3,14 +3,17 @@ extends Node
 signal changed(hp: int)
 signal died
 
-@export var max_hp := 3
 @export var blink_target: Node3D
 
-var hp := 3
+var max_hp := 1
+var hp := 1
+var stats: PlayerStats
 var invincible := false
 
 
-func _ready() -> void:
+func setup(s: PlayerStats) -> void:
+	stats = s
+	max_hp = s.max_hp
 	hp = max_hp
 
 
@@ -34,10 +37,10 @@ func heal(amount: int) -> void:
 
 func invincibility() -> void:
 	invincible = true
-	for i in 10:
+	for i in int(stats.invincibility_time / stats.blink_interval):
 		if not is_inside_tree():
 			return
 		blink_target.visible = not blink_target.visible
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(stats.blink_interval).timeout
 	blink_target.visible = true
 	invincible = false

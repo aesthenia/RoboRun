@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TurretStats" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/turret_stats.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+max_hp = 3
+contact_damage = 0
+walk_speed = 0.0
+turn_speed = 8.0
+vision_range = 12.0
+view_angle = 140.0
+alert_time = 2.0
+scan_arc = 90.0
+scan_speed = 0.8
+scan_turn_speed = 3.0
+aim_time = 0.6
+aim_turn_speed = 5.0
+fire_time = 0.2
+cooldown = 1.6
+projectile_speed = 9.0
+projectile_damage = 1

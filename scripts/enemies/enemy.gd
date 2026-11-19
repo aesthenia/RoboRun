@@ -4,10 +4,15 @@ extends AnimatableBody3D
 signal hp_changed(hp: int, max_hp: int)
 signal died
 
-@export var max_hp := 2
-@export var contact_damage := 1
+@export var stats: EnemyStats
 
 var hp := 0
+var max_hp: int:
+	get:
+		return stats.max_hp
+var contact_damage: int:
+	get:
+		return stats.contact_damage
 
 
 func _ready() -> void:

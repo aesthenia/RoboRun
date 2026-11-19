@@ -1,7 +1,8 @@
 class_name Hazard
 extends RigidBody3D
 
-@export var lifetime := 4.0
+var lifetime := 4.0
+var damage := 1
 
 var landed := false
 
@@ -24,7 +25,7 @@ func _on_body_entered(body: Node) -> void:
 
 
 func on_hit_player(health) -> void:
-	health.take_damage(1)
+	health.take_damage(damage)
 
 
 func on_landed() -> void:

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/enemies/patrol_bomb.gd" id="1_gtk2r"]
 [ext_resource type="PackedScene" path="res://assets/models/comical_bomb.glb" id="2_ricql"]
+[ext_resource type="Resource" path="res://data/enemies/patrol_bomb.tres" id="99_stats"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_t5a6s"]
 
@@ -40,6 +41,7 @@ _data = {
 
 [node name="PatrolBomb" type="AnimatableBody3D" unique_id=1070703356]
 script = ExtResource("1_gtk2r")
+stats = ExtResource("99_stats")
 
 [node name="Model" type="Node3D" parent="." unique_id=41921734]
 

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/enemy_stats.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+max_hp = 2
+contact_damage = 1
+walk_speed = 2.5
+turn_speed = 8.0
+vision_range = 0.0
+view_angle = 110.0
+alert_time = 0.0

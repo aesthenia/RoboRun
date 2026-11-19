@@ -1,7 +1,6 @@
 extends Node
 
 @export var bullet_scene: PackedScene
-@export var cooldown := 0.3
 
 var next_shot := 0.0
 var firing := false
@@ -21,7 +20,7 @@ func _process(_delta: float) -> void:
 		firing = false
 	var now := Time.get_ticks_msec() / 1000.0
 	if firing and now >= next_shot and not player.dead:
-		next_shot = now + cooldown
+		next_shot = now + player.stats.shoot_cooldown
 		shoot()
 
 
@@ -31,6 +30,9 @@ func shoot() -> void:
 	dir = dir.normalized()
 	var bullet: Projectile = bullet_scene.instantiate()
 	bullet.direction = dir
+	bullet.speed = player.stats.bullet_speed
+	bullet.max_range = player.stats.bullet_range
+	bullet.damage = player.stats.bullet_damage
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = player.global_position + dir * 0.7 + Vector3.UP * 0.9
 	Audio.play("shoot", -4.0)
