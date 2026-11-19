@@ -33,6 +33,46 @@ roughness = 0.9
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otr3d"]
 albedo_color = Color(0.47, 0.33, 0.22, 1)
 
+[sub_resource type="StyleBoxFlat" id="Style_red"]
+content_margin_left = 28.0
+content_margin_right = 28.0
+bg_color = Color(0.78, 0.21, 0.17, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.85)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="Style_red_hover"]
+content_margin_left = 28.0
+content_margin_right = 28.0
+bg_color = Color(0.9, 0.28, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Gradient" id="Gradient_knob"]
+offsets = PackedFloat32Array(0, 0.62, 0.7, 0.71)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 0.38, 0, 1, 1, 0.38, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="Tex_knob"]
+gradient = SubResource("Gradient_knob")
+width = 64
+height = 64
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="MainMenu" type="Node3D" unique_id=1162808329]
 script = ExtResource("1_m1kxf")
 
@@ -127,9 +167,10 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -820.0
-offset_top = -320.0
+offset_top = -390.0
 offset_right = -120.0
-offset_bottom = 320.0
+offset_bottom = 390.0
+grow_vertical = 2
 theme_override_constants/separation = 14
 alignment = 1
 
@@ -165,9 +206,249 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Играть"
 
+[node name="BtnSettings" type="Button" parent="UI/Root/SafeArea/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(460, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Настройки"
+
 [node name="BtnQuit" type="Button" parent="UI/Root/SafeArea/Column" unique_id=2065655515]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(460, 120)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Выйти"
+
+[node name="LevelPanel" type="Control" parent="UI/Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Dim" type="ColorRect" parent="UI/Root/LevelPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="SafeArea" type="Control" parent="UI/Root/LevelPanel"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("9_safe")
+
+[node name="Center" type="CenterContainer" parent="UI/Root/LevelPanel/SafeArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Card" type="PanelContainer" parent="UI/Root/LevelPanel/SafeArea/Center"]
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="UI/Root/LevelPanel/SafeArea/Center/Card"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Heading" type="Label" parent="UI/Root/LevelPanel/SafeArea/Center/Card/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Выбор уровня"
+horizontal_alignment = 1
+
+[node name="LevelGrid" type="GridContainer" parent="UI/Root/LevelPanel/SafeArea/Center/Card/Box"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="BtnLevelsBack" type="Button" parent="UI/Root/LevelPanel/SafeArea/Center/Card/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(460, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Назад"
+
+[node name="SettingsPanel" type="Control" parent="UI/Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Dim" type="ColorRect" parent="UI/Root/SettingsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="SafeArea" type="Control" parent="UI/Root/SettingsPanel"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("9_safe")
+
+[node name="Center" type="CenterContainer" parent="UI/Root/SettingsPanel/SafeArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Card" type="PanelContainer" parent="UI/Root/SettingsPanel/SafeArea/Center"]
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="UI/Root/SettingsPanel/SafeArea/Center/Card"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Heading" type="Label" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Настройки"
+horizontal_alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="MusicLabel" type="Label" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box/MusicRow"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Музыка"
+
+[node name="MusicSlider" type="HSlider" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box/MusicRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(560, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_icons/grabber = SubResource("Tex_knob")
+theme_override_icons/grabber_highlight = SubResource("Tex_knob")
+max_value = 1.0
+step = 0.05
+
+[node name="SfxRow" type="HBoxContainer" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="SfxLabel" type="Label" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box/SfxRow"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Звуки"
+
+[node name="SfxSlider" type="HSlider" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box/SfxRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(560, 120)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_icons/grabber = SubResource("Tex_knob")
+theme_override_icons/grabber_highlight = SubResource("Tex_knob")
+max_value = 1.0
+step = 0.05
+
+[node name="BtnReset" type="Button" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(560, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("Style_red")
+theme_override_styles/hover = SubResource("Style_red_hover")
+theme_override_styles/pressed = SubResource("Style_red_hover")
+theme_override_styles/focus = SubResource("Style_red_hover")
+text = "Сбросить прогресс"
+
+[node name="BtnSettingsBack" type="Button" parent="UI/Root/SettingsPanel/SafeArea/Center/Card/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(460, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Готово"
+
+[node name="ConfirmPanel" type="Control" parent="UI/Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Dim" type="ColorRect" parent="UI/Root/ConfirmPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.72)
+
+[node name="SafeArea" type="Control" parent="UI/Root/ConfirmPanel"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("9_safe")
+
+[node name="Center" type="CenterContainer" parent="UI/Root/ConfirmPanel/SafeArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Card" type="PanelContainer" parent="UI/Root/ConfirmPanel/SafeArea/Center"]
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="UI/Root/ConfirmPanel/SafeArea/Center/Card"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Heading" type="Label" parent="UI/Root/ConfirmPanel/SafeArea/Center/Card/Box"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Удалить весь прогресс?"
+horizontal_alignment = 1
+
+[node name="ConfirmText" type="Label" parent="UI/Root/ConfirmPanel/SafeArea/Center/Card/Box"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(820, 0)
+layout_mode = 2
+text = "..."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="UI/Root/ConfirmPanel/SafeArea/Center/Card/Box"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 32
+
+[node name="BtnCancel" type="Button" parent="UI/Root/ConfirmPanel/SafeArea/Center/Card/Box/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Отмена"
+
+[node name="BtnDelete" type="Button" parent="UI/Root/ConfirmPanel/SafeArea/Center/Card/Box/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("Style_red")
+theme_override_styles/hover = SubResource("Style_red_hover")
+theme_override_styles/pressed = SubResource("Style_red_hover")
+theme_override_styles/focus = SubResource("Style_red_hover")
+text = "Удалить"
