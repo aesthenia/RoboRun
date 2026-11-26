@@ -20,3 +20,9 @@ I used Claude as my AI agent. I tested everything myself in Godot 4.7.
 - 19.11  When Claude split my old levels into separate files, it lost the links to the resources and the scenes stopped loading. Fixed the script and checked that all 4 levels open.
 - 19.11  Saves go to save.json. If the file is missing or broken, the game just starts with default values. Godot reads every number from JSON as a float, so the loading code checks the types too.
 - 19.11  The game saves after a level, when you change the volume, and when the app goes to the background.
+
+## Week 12 (sound)
+- 25.11  I didn't know where my old music.mp3 came from, so I couldn't put a license in the README. Claude made two new tracks (menu and level) with a Python script instead, so now all the sound is our own work. They're OGG, so there's no gap at the loop like with MP3.
+- 25.11  Before, every sound went straight to Master and the volume was calculated in the code for each sound. Now there are buses: Music, Tracks and SFX. The sliders change the bus volume in dB.
+- 25.11  Godot doesn't have mixer snapshots, so for the pause there's a Tracks bus with a lowpass filter. When the game is paused, it goes 6 dB quieter and the filter drops to 800 Hz, so the music sounds muffled.
+- 25.11  The old bomb on level 2 could hit you without any sound, and the turret's warning was just a tiny click. Added a fuse hiss when you get close to the bomb and a charging sound when the turret aims.
