@@ -30,7 +30,7 @@ func change_state(s: State) -> void:
 	alert.text = "!!" if s == State.FUSE else "!"
 	_clear_mark()
 	if s == State.FUSE:
-		Audio.play("fireball", -2.0)
+		Audio.play_at("fuse", global_position, 2.0)
 		if blast_mark_scene:
 			mark = blast_mark_scene.instantiate()
 			get_tree().current_scene.add_child(mark)
@@ -104,7 +104,7 @@ func _fuse(delta: float) -> void:
 
 
 func _explode() -> void:
-	Audio.play("explosion")
+	Audio.play_at("explosion", global_position)
 	if player_alive() and distance_to_player() <= cfg.blast_radius and absf(player.global_position.y - global_position.y) < 2.0:
 		player.hurt(cfg.blast_damage, global_position)
 

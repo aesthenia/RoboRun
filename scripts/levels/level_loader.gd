@@ -33,7 +33,7 @@ func _ready() -> void:
 		hud.show_boss(boss)
 		var trigger: Area3D = layout.get_node("ArenaTrigger")
 		trigger.body_entered.connect(_on_arena_entered)
-	Audio.play_music()
+	Audio.play_music("level")
 
 
 func _process(delta: float) -> void:

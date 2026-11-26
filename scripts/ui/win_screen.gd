@@ -9,3 +9,4 @@ func _ready() -> void:
 	%BtnMenu.pressed.connect(func(): Audio.play("click"); GameManager.to_menu())
 	%BtnMenu.grab_focus()
 	Audio.play("win")
+	Audio.play_music("menu")

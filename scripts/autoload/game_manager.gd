@@ -102,6 +102,7 @@ func _fail(text: String) -> void:
 	if busy:
 		return
 	busy = true
+	Audio.play("lose")
 	message.emit(text)
 	await get_tree().create_timer(1.6).timeout
 	restart_level()

@@ -33,11 +33,11 @@ func take_hit(dmg: int) -> void:
 
 
 func on_hurt() -> void:
-	Audio.play("boss_hit", -6.0)
+	Audio.play_at("boss_hit", global_position, -4.0)
 
 
 func on_death() -> void:
-	Audio.play("explosion")
+	Audio.play_at("explosion", global_position)
 	queue_free()
 
 

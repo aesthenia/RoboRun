@@ -26,7 +26,7 @@ func _ready() -> void:
 	sfx_slider.drag_ended.connect(func(_c): SaveManager.save(); Audio.play("click"))
 	_build_level_buttons()
 	%BtnPlay.grab_focus()
-	Audio.play_music()
+	Audio.play_music("menu")
 
 
 func _build_level_buttons() -> void:

@@ -32,5 +32,5 @@ ROBO RUN — мобильный 3D-платформер (мидтерм)
   Шипы: «Spike Trap 01» — Nichgon, Sketchfab Standard License.
       https://sketchfab.com/3d-models/spike-trap-01-4022678cac214fd2963894aa152fc6f2
   Звуковые эффекты (audio/sfx): сгенерированы программно (синтез на Python), без сторонних источников.
-  Музыка (audio/music/music.mp3): ДОПИСАТЬ — название, автор, источник, лицензия.
+  Музыка (audio/music/menu_loop.ogg, level_loop.ogg): синтезирована программно (tools/make_audio.py), своя работа.
   Острова, монеты, портал, снаряды, интерфейс: встроенные примитивы и шрифт Godot.

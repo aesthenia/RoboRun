@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="EnemyStats" format=3]
+[gd_resource type="Resource" script_class="PatrolBombStats" format=3]
 
-[ext_resource type="Script" path="res://scripts/data/enemy_stats.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/data/patrol_bomb_stats.gd" id="1_script"]
 
 [resource]
 script = ExtResource("1_script")
@@ -11,3 +11,5 @@ turn_speed = 8.0
 vision_range = 0.0
 view_angle = 110.0
 alert_time = 0.0
+warn_range = 4.5
+warn_interval = 1.2

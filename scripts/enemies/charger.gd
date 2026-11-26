@@ -25,7 +25,7 @@ func change_state(s: State) -> void:
 	alert.visible = s == State.WINDUP or s == State.STUNNED
 	alert.text = "zz" if s == State.STUNNED else "!"
 	if s == State.WINDUP:
-		Audio.play("boss_roar", -8.0)
+		Audio.play_at("boss_roar", global_position, -4.0)
 		dash_mark.scale = Vector3(1.0, 1.0, cfg.dash_distance)
 		dash_mark.position.z = cfg.dash_distance * 0.5
 	elif s == State.DASH:
@@ -33,7 +33,7 @@ func change_state(s: State) -> void:
 		dashed = 0.0
 		hit_player = false
 	elif s == State.STUNNED:
-		Audio.play("boss_hit", -4.0)
+		Audio.play_at("boss_hit", global_position)
 	enter_state(State.keys()[s])
 
 

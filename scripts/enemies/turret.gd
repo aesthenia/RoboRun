@@ -26,7 +26,7 @@ func change_state(s: State) -> void:
 	alert.text = "!"
 	head.scale = Vector3.ONE
 	if s == State.AIM:
-		Audio.play("click", 2.0)
+		Audio.play_at("charge", global_position)
 	elif s == State.FIRE:
 		_fire()
 	enter_state(State.keys()[s])
@@ -78,7 +78,7 @@ func _fire() -> void:
 	p.damage = cfg.projectile_damage
 	get_tree().current_scene.add_child(p)
 	p.global_position = global_position + dir * muzzle_forward + Vector3.UP * muzzle_height
-	Audio.play("fireball")
+	Audio.play_at("fireball", global_position)
 
 
 func _recoil() -> void:
